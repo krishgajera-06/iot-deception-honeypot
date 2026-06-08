@@ -1,11 +1,43 @@
-# Project Workflow
+# IoT Deception Honeypot Demo Guide
 
-1. Attacker connects to Cowrie Honeypot
-2. Cowrie captures attacker activity
-3. Logs are stored in cowrie.json
-4. Promtail collects logs
-5. Loki stores logs
-6. Grafana visualizes logs
+## Step 1: Start Containers
 
-## Outcome
-The system helps monitor and analyze attacker behavior.
+sudo docker compose up -d
+
+## Step 2: Verify Services
+
+sudo docker ps
+
+Services:
+- Cowrie
+- Grafana
+- Loki
+- Promtail
+
+## Step 3: Simulate Attack
+
+ssh root@<IP> -p 2222
+
+Commands:
+ls
+pwd
+whoami
+
+## Step 4: Verify Logs
+
+tail -f cowrie/var/log/cowrie/cowrie.json
+
+## Step 5: Open Grafana
+
+http://localhost:3000
+
+## Step 6: View Dashboard
+
+- Live Attack Logs
+- SSH Login Attempts
+- Attacker Commands
+- Attack Timeline
+
+## Expected Outcome
+
+The attack activity should be captured by Cowrie, forwarded through Promtail and Loki, and visualized in Grafana.
